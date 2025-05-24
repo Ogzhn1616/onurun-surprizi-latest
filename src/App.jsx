@@ -14,7 +14,7 @@ const App = () => {
   const [finalMode, setFinalMode] = useState(false);
 
   const handleStart = async () => {
-    const bgAudio = new Audio("https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Komiku/Poupis_Adventure/Komiku_-_03_-_The_path_of_the_heroes.mp3");
+    const bgAudio = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_9f125b47b4.mp3");
     bgAudio.loop = true;
     bgAudio.volume = 0.6;
     try {
