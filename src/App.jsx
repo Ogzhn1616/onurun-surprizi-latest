@@ -11,16 +11,7 @@ const App = () => {
   const [phase, setPhase] = useState(0);
   const [hearts, setHearts] = useState([]);
   const [score, setScore] = useState(0);
-  const [visibleLines, setVisibleLines] = useState([]);
-  const [finalShown, setFinalShown] = useState(false);
-
-  const finalLines = [
-    "Tebrikler! Tüm kalp balonlarını patlattın 🎉",
-    "Onur... 💛",
-    "Bu küçük oyunu sadece senin için yaptım.",
-    "Hepsini patlattın. Ama hâlâ burada bir sürü kalp bıraktın.",
-    "🎈"
-  ];
+  const [finalMode, setFinalMode] = useState(false);
 
   const handleStart = async () => {
     const bgAudio = new Audio("https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Komiku/Poupis_Adventure/Komiku_-_03_-_The_path_of_the_heroes.mp3");
@@ -38,7 +29,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (phase === 2 && score < TOTAL_SCORE) {
+    if ((phase === 2 || finalMode) && score < TOTAL_SCORE) {
       const interval = setInterval(() => {
         const newHeart = {
           id: Date.now(),
@@ -51,18 +42,15 @@ const App = () => {
       }, 250);
       return () => clearInterval(interval);
     }
-  }, [phase, score]);
+  }, [phase, finalMode, score]);
 
   useEffect(() => {
-    if (score >= TOTAL_SCORE && !finalShown) {
-      finalLines.forEach((line, i) => {
-        setTimeout(() => {
-          setVisibleLines(prev => [...prev, line]);
-        }, i * 2000);
-      });
-      setFinalShown(true);
+    if (score >= TOTAL_SCORE && !finalMode) {
+      setTimeout(() => {
+        setFinalMode(true);
+      }, 1000);
     }
-  }, [score, finalShown]);
+  }, [score, finalMode]);
 
   const popHeart = id => {
     setHearts(prev => prev.filter(h => h.id !== id));
@@ -73,9 +61,43 @@ const App = () => {
     setPhase(2);
     setHearts([]);
     setScore(0);
-    setVisibleLines([]);
-    setFinalShown(false);
+    setFinalMode(false);
   };
+
+  if (finalMode) {
+    return (
+      <div className="relative bg-gradient-to-b from-pink-100 via-yellow-100 to-white text-red-500 font-press min-h-screen overflow-hidden flex flex-col items-center justify-center px-4">
+        {hearts.map(heart => (
+          <div
+            key={heart.id}
+            className={`absolute text-3xl animate-rise ${heart.color}`}
+            style={{
+              left: `${heart.x}%`,
+              bottom: "-50px",
+              animationDelay: `${heart.delay}s`
+            }}
+          >
+            {heart.emoji}
+          </div>
+        ))}
+        <div className="relative z-10 mt-20 max-w-md h-60 overflow-hidden">
+          <div className="animate-scroll text-center space-y-4 text-base sm:text-lg leading-relaxed">
+            <p>Tebrikler! Tüm kalp balonlarını patlattın 🎉</p>
+            <p>Onur... 💛</p>
+            <p>Bu küçük oyunu sadece senin için yaptım.</p>
+            <p>Hepsini patlattın. Ama hâlâ burada bir sürü kalp bıraktın.</p>
+            <p>🎈</p>
+          </div>
+        </div>
+        <button
+          onClick={restartGame}
+          className="mt-10 z-10 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded"
+        >
+          Tekrar oyna 🔁
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-gradient-to-b from-pink-100 via-yellow-100 to-white text-red-500 font-press min-h-screen flex flex-col justify-between items-center text-center px-4 relative overflow-hidden pb-20 pt-6">
@@ -127,24 +149,6 @@ const App = () => {
               {heart.emoji}
             </div>
           ))}
-
-          {finalShown && (
-            <div className="absolute bottom-6 text-center fade-in px-4">
-              {visibleLines.map((line, index) => (
-                <p key={index} className="typewriter text-base sm:text-lg leading-relaxed mb-2">
-                  {line}
-                </p>
-              ))}
-              {visibleLines.length === finalLines.length && (
-                <button
-                  className="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded"
-                  onClick={restartGame}
-                >
-                  Tekrar oyna 🔁
-                </button>
-              )}
-            </div>
-          )}
         </>
       )}
 
