@@ -15,9 +15,6 @@ const App = () => {
 
   const finalLines = [
     "Tebrikler! Tüm kalp balonlarını patlattın 🎉",
-    "Onur... 💛",
-    "Bu küçük oyunu sadece senin için yaptım.",
-    "Hepsini patlattın. Ama hâlâ burada bir sürü kalp bıraktın.",
     "🎈"
   ];
 
@@ -92,8 +89,7 @@ const App = () => {
 
       {started && phase === 1 && (
         <p className="text-xl mt-6 fade-in">
-          Seni çok özledim.<br />
-          Bu küçük oyunu sadece sen gülümsersin diye yaptım 💛
+          Onur, bu küçük oyunu sadece senin için yaptım 💛
         </p>
       )}
 
