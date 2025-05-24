@@ -93,19 +93,23 @@ const App = () => {
     <div className="bg-gradient-to-b from-pink-100 via-yellow-100 to-white text-red-500 font-press min-h-screen flex flex-col justify-between items-center text-center px-4 relative overflow-hidden pb-20 pt-6">
       {!started && !rejected && (
         <>
-          <div className="text-center">
-            <h1 className="text-2xl md:text-3xl mb-3 typewriter">🎈 Onur’un Balon Macerası</h1>
-            <p className="text-base mb-6 fade-in">Başlamak ister misin?</p>
-            <div className="flex gap-4 justify-center">
+         <div className="text-center px-4 max-w-xs">
+            <h1 className="text-2xl md:text-3xl mb-4 typewriter leading-relaxed">
+              🎈 Onur’un<br />Balon<br />Macerası
+            </h1>
+            <p className="text-base mb-8 fade-in leading-snug">
+              Başlamak<br />ister misin?
+            </p>
+            <div className="flex flex-col gap-4 items-center">
               <button
                 onClick={handleStart}
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded w-40"
               >
                 Evet
               </button>
               <button
                 onClick={() => setRejected(true)}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded w-40"
               >
                 Hayır
               </button>
