@@ -14,7 +14,7 @@ const App = () => {
   const [finalMode, setFinalMode] = useState(false);
 
   const handleStart = async () => {
-    const bgAudio = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_9f125b47b4.mp3");
+    const bgAudio = new Audio("https://dl.sndup.net/9krr/8bit-loop.mp3");
     bgAudio.loop = true;
     bgAudio.volume = 0.6;
     try {
@@ -84,9 +84,8 @@ const App = () => {
           <div className="animate-scroll text-center space-y-4 text-base sm:text-lg leading-relaxed">
             <p>Tebrikler! Tüm kalp balonlarını patlattın 🎉</p>
             <p>Onur... 💛</p>
-            <p>Bu küçük oyunu sadece senin için yaptım.</p>
-            <p>Hepsini patlattın. Ama hâlâ burada bir sürü kalp bıraktın.</p>
-            <p>🎈</p>
+            <p>Hepsini patlattın. Ama hâlâ burada bir kalp bıraktın.</p>
+            <p>Şampuanlarımızın çalınmadığı bir dünya dileğiyle.🎈</p>
           </div>
         </div>
         <button
@@ -103,7 +102,7 @@ const App = () => {
     <div className="bg-gradient-to-b from-pink-100 via-yellow-100 to-white text-red-500 font-press min-h-screen flex flex-col justify-between items-center text-center px-4 relative overflow-hidden pb-20 pt-6">
       {!started && !rejected && (
         <>
-          <h1 className="text-2xl md:text-3xl mb-6 typewriter">Hazır mısın Onur?</h1>
+          <h1 className="text-2xl md:text-3xl mb-6 typewriter">Onur, hazır mısın?</h1>
           <div className="flex gap-4">
             <button
               onClick={handleStart}
@@ -123,8 +122,7 @@ const App = () => {
 
       {started && phase === 1 && (
         <p className="text-xl mt-6 fade-in">
-          Seni çok özledim.<br />
-          Bu küçük oyunu sadece sen gülümsersin diye yaptım 💛
+           Bu küçük oyunu sadece senin için yaptım...
         </p>
       )}
 
