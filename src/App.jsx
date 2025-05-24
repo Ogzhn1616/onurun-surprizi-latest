@@ -7,6 +7,7 @@ const EMOJIS = ["❤️", "🧡", "💛", "💚", "💙", "💜", "🩷"];
 
 const App = () => {
   const [started, setStarted] = useState(false);
+  const [rejected, setRejected] = useState(false);
   const [phase, setPhase] = useState(0);
   const [hearts, setHearts] = useState([]);
   const [score, setScore] = useState(0);
@@ -15,6 +16,9 @@ const App = () => {
 
   const finalLines = [
     "Tebrikler! Tüm kalp balonlarını patlattın 🎉",
+    "Onur... 💛",
+    "Bu küçük oyunu sadece senin için yaptım.",
+    "Hepsini patlattın. Ama hâlâ burada bir sürü kalp bıraktın.",
     "🎈"
   ];
 
@@ -75,27 +79,36 @@ const App = () => {
 
   return (
     <div className="bg-gradient-to-b from-pink-100 via-yellow-100 to-white text-red-500 font-press min-h-screen flex flex-col justify-between items-center text-center px-4 relative overflow-hidden pb-20 pt-6">
-      {!started && (
+      {!started && !rejected && (
         <>
           <h1 className="text-2xl md:text-3xl mb-6 typewriter">Hazır mısın Onur?</h1>
-          <button
-            onClick={handleStart}
-            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Evet
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={handleStart}
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Evet
+            </button>
+            <button
+              onClick={() => setRejected(true)}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Hayır
+            </button>
+          </div>
         </>
       )}
 
       {started && phase === 1 && (
         <p className="text-xl mt-6 fade-in">
-          Onur, bu küçük oyunu sadece senin için yaptım 💛
+          Seni çok özledim.<br />
+          Bu küçük oyunu sadece sen gülümsersin diye yaptım 💛
         </p>
       )}
 
       {started && phase === 2 && (
         <>
-          <div className="fixed top-2 left-2 text-base bg-white bg-opacity-60 px-3 py-1 rounded shadow">
+          <div className="fixed top-4 sm:top-2 left-2 text-sm sm:text-base bg-white bg-opacity-60 px-3 py-1 rounded shadow">
             Skor: {score} / {TOTAL_SCORE}
           </div>
 
@@ -132,6 +145,13 @@ const App = () => {
               )}
             </div>
           )}
+        </>
+      )}
+
+      {rejected && (
+        <>
+          <p className="text-4xl mb-4">:(</p>
+          <p className="text-xl">Peki... sonra tekrar dene :)</p>
         </>
       )}
     </div>
